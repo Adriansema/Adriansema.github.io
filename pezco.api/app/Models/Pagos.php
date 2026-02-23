@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Pagos extends Model
 {
@@ -34,4 +35,14 @@ class Pagos extends Model
         'monto' => 'decimal:2',
         'fecha_pago' => 'datetime',
     ];
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(Usuarios::class);
+    }
+
+    public function usuario_licencia(): BelongsTo
+    {
+        return $this->belongsTo(Usuario_licencia::class);
+    }
 }

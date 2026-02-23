@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Licencia extends Model
 {
@@ -34,4 +36,9 @@ class Licencia extends Model
         'precio_mes' => 'decimal:2',
         'precio_anual' => 'decimal:2'
     ];
+
+    public function usuario_licencia(): HasMany
+    {
+        return $this->hasMany(Usuario_licencia::class);
+    }
 }

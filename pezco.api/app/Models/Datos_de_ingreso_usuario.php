@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Datos_de_ingreso_usuario extends Model
 {
@@ -29,4 +30,9 @@ class Datos_de_ingreso_usuario extends Model
         'id' => 'integer',
         'usuario_id' => 'integer',
     ];
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(Usuarios::class);
+    }
 }

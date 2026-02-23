@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Finanzas extends Model
 {
@@ -31,4 +33,14 @@ class Finanzas extends Model
         'precio_esperado' => 'decimal:2',
         'precio_final' => 'decimal:2'
     ];
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(Usuarios::class);
+    }
+
+    public function camada(): HasMany
+    {
+        return $this->hasMany(Camadas::class);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Suministros extends Model
 {
@@ -15,8 +16,8 @@ class Suministros extends Model
 
     protected $fillable = [
         'fecha',
-        'insumo',
-        'camada',
+        'insumo_id',
+        'camada_id',
         'cantidad',
         'unidad_metrica'
     ];
@@ -28,4 +29,14 @@ class Suministros extends Model
         'fecha' => 'datetime',
         'cantidad' => 'decimal:2'
     ];
+
+    public function insumo(): BelongsTo
+    {
+        return $this->belongsTo(Insumos::class);
+    }
+
+    public function camada(): BelongsTo
+    {
+        return $this->belongsTo(Camadas::class);
+    }
 }

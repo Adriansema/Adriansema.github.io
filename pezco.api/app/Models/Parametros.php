@@ -47,4 +47,9 @@ class Parametros extends Model
         'nitrato' => 'decimal:2',
         'fecha_medicion' => 'datetime'
     ];
+
+    public function camada()
+    {
+        return $this->belongsTo(Camadas::class);
+    }
 }

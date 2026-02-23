@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Estanques extends Model
 {
@@ -38,4 +39,14 @@ class Estanques extends Model
         'capacidad_ejemplares' => 'integer',
         'fecha' => 'datetime',
     ];
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(Usuarios::class);
+    }
+
+    public function camadas(): BelongsTo
+    {
+        return $this->belongsTo(Camadas::class);
+    }
 }

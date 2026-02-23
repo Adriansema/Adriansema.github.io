@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Insumos extends Model
 {
@@ -17,7 +19,7 @@ class Insumos extends Model
         'insumo',
         'cantidad',
         'unidad_metrica',
-        'usuario',
+        'usuario_id',
         'fecha',
         'costo'
     ];
@@ -30,4 +32,14 @@ class Insumos extends Model
         'fecha' => 'datetime',
         'costo' => 'decimal:2'
     ];
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(Usuarios::class);
+    }
+
+    public function suministro(): HasMany
+    {
+        return $this->hasMany(Suministros::class);
+    }
 }
