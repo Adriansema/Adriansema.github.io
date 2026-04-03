@@ -8,6 +8,7 @@ class AppColors {
   //Backgrond
   static const Color background = Color(0xFFF4F4F4);
   static const Color backgroundComponent = Color(0x08000000);
-  static const Color backgroundComponentWhite = Color(0x80ffffff);
+  static const Color backgroundComponentSelected = Color(0x80ffffff);
+  static const Color backgroundComponentMenu = Color(0x4Dffffff);
 
 }
