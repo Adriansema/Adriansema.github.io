@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pezco_client/core/app_color.dart';
 import 'package:pezco_client/presentation/layout/sidebar/sidebar.dart';
+import 'package:pezco_client/presentation/screens/Finanzas_screen.dart';
+import 'package:pezco_client/presentation/screens/Piscinas_screen.dart';
+import 'package:pezco_client/presentation/screens/Reportes_screen.dart';
 import 'package:pezco_client/presentation/screens/home_screen.dart';
 
 class AppLayout extends StatefulWidget {
@@ -13,10 +16,11 @@ class AppLayout extends StatefulWidget {
 class _AppLayoutState extends State<AppLayout> {
   int _selectedIndex = 0;
 
-  // Agrega aquí cada pantalla que tengas
   final List<Widget> _screens = const [
     HomeScreen(),
-    // SettingsScreen(),
+    PiscinasScreen(),
+    FinanzasScreen(),
+    ReportesScreen(),
   ];
 
   @override
@@ -25,7 +29,6 @@ class _AppLayoutState extends State<AppLayout> {
       backgroundColor: AppColors.background,
       body: Row(
         children: [
-          // Sidebar con ancho fijo
           SizedBox(
             width: 200,
             child: Sidebar(
@@ -33,9 +36,7 @@ class _AppLayoutState extends State<AppLayout> {
               onItemSelected: (index) => setState(() => _selectedIndex = index),
             ),
           ),
-          // Línea divisoria opcional
           const VerticalDivider(width: 1),
-          // Contenido: ocupa todo el espacio restante
           Expanded(
             child: _screens[_selectedIndex],
           ),
