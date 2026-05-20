@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pezco_client/core/app_color.dart';
+import 'package:pezco_client/core/responsive.dart';
 import 'package:pezco_client/presentation/components/header.dart';
 import 'package:pezco_client/presentation/components/home/diversidad.dart';
 import 'package:pezco_client/presentation/components/home/estadistica.dart';
@@ -16,77 +17,205 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final isCompact = ResponsiveSize.isCompactDevice(context);
+    final isTablet = ResponsiveSize.isTablet(context);
+
     return Container(
       width: double.infinity,
       height: double.infinity,
       color: AppColors.background,
       child: Column(
         children: [
-          Expanded(flex: 1, child: Header()),
-          const SizedBox(height: 20),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
+          if (isCompact)
+            Expanded(
+              child: Column(
                 children: [
-                  Container(
-                    width: 450,
-                    height: 400,
-                    color: AppColors.background,
-                    child: const Proyeccion(),
-                  ),
-                  const SizedBox(width: 10),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Container(
-                            width: 220,
-                            height: 400,
-                            color: Colors.transparent,
-                            child: Piscina(),
-                          ),
+                  const Header(),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    flex: 5,
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              height: ResponsiveSize.getProyeccionWidth(
+                                context,
+                              ),
+                              constraints: BoxConstraints(
+                                maxWidth: 450,
+                                maxHeight: 400,
+                              ),
+                              color: AppColors.background,
+                              child: const Proyeccion(),
+                            ),
+                            const SizedBox(height: 20),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  for (int i = 0; i < 4; i++)
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                      ),
+                                      child: Container(
+                                        width: ResponsiveSize.getPiscinaWidth(
+                                          context,
+                                        ),
+                                        height: ResponsiveSize.getPiscinaHeight(
+                                          context,
+                                        ),
+                                        color: Colors.transparent,
+                                        child: Piscina(),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              width: double.infinity,
+                              height: 60,
+                              color: Colors.transparent,
+                              child: Diversidad(),
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              width: double.infinity,
+                              height: 300,
+                              color: AppColors.background,
+                              child: const Estadistica(),
+                            ),
+                            const SizedBox(height: 20),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Expanded(
-            flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: AppColors.background,
-                      child: const Estadistica(),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Diversidad(),
                       ),
                     ),
                   ),
                 ],
               ),
+            )
+          else
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: Column(
+                        children: [
+                          if (isTablet)
+                            const Header()
+                          else
+                            SizedBox(
+                              height: (constraints.maxHeight * 0.14).clamp(
+                                120.0,
+                                double.infinity,
+                              ),
+                              child: Header(),
+                            ),
+                          const SizedBox(height: 20),
+                          SizedBox(
+                            height: isTablet
+                                ? (constraints.maxHeight * 0.42).clamp(
+                                    300.0,
+                                    double.infinity,
+                                  )
+                                : (constraints.maxHeight * 0.40).clamp(
+                                    300.0,
+                                    double.infinity,
+                                  ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: ResponsiveSize.getProyeccionWidth(
+                                      context,
+                                    ),
+                                    constraints: const BoxConstraints(
+                                      maxWidth: 450,
+                                      minWidth: 300,
+                                      maxHeight: 400,
+                                      minHeight: 300,
+                                    ),
+                                    color: AppColors.background,
+                                    child: const Proyeccion(),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                          ),
+                                          child: Container(
+                                            width: 220,
+                                            height: 400,
+                                            color: Colors.transparent,
+                                            child: Piscina(),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          SizedBox(
+                            height: isTablet
+                                ? (constraints.maxHeight * 0.42).clamp(
+                                    300.0,
+                                    double.infinity,
+                                  )
+                                : (constraints.maxHeight * 0.40).clamp(
+                                    300.0,
+                                    double.infinity,
+                                  ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      color: AppColors.background,
+                                      child: const Estadistica(),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: Colors.transparent,
+                                      child: Diversidad(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
         ],
       ),
     );
