@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pezco_client/core/app_color.dart';
 import 'package:pezco_client/core/widgets/hover_region.dart';
+import 'package:pezco_client/presentation/components/headComponent.dart';
 
 class Proyeccion extends StatefulWidget {
   const Proyeccion({super.key});
@@ -10,7 +12,6 @@ class Proyeccion extends StatefulWidget {
 }
 
 class _ProyeccionState extends State<Proyeccion> {
-  bool _hoveredP = false;
   bool _hoveredG = false;
   bool _hoveredT = false;
 
@@ -34,66 +35,14 @@ class _ProyeccionState extends State<Proyeccion> {
           children: [
             Expanded(
               flex: 2,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double maxheight = constraints.maxHeight;
-                  return SizedBox(
-                    width: double.infinity,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: maxheight,
-                          height: maxheight,
-                          decoration: const BoxDecoration(
-                            color: AppColors.backgroundElement,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          child: Transform(
-                            alignment: Alignment.center,
-                            transform: Matrix4.rotationZ(5.8),
-                            child: Icon(
-                              Icons.flag_rounded,
-                              color: Color(0xFF000000),
-                              size: maxheight * 0.8,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          "Proyección",
-                          style: TextStyle(
-                            color: Color(0xFF000000),
-                            fontSize: 20,
-                          ),
-                        ),
-                        Expanded(child: SizedBox()),
-                        MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: HoverRegion(
-                            onEnter: () => setState(() => _hoveredP = true),
-                            onExit: () => setState(() => _hoveredP = false),
-                            child: Container(
-                              width: maxheight,
-                              height: maxheight,
-                              decoration: BoxDecoration(
-                                color: _hoveredP ? AppColors.backgroundComponentSelected : Colors.transparent,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.navigate_next,
-                                color: _hoveredP ? Color(0xFF000000) : Color(0x80000000),
-                                size: 40,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+              child: HeadComponent(
+                title: "Proyección",
+                action: true,
+                iconMain: FontAwesomeIcons.solidFlag,
+                iconGo: FontAwesomeIcons.angleRight,
+                inclinacion: true,
+                claro: true,
+                letra: 0.4,
               ),
             ),
             SizedBox(height: 20),
@@ -143,10 +92,12 @@ class _ProyeccionState extends State<Proyeccion> {
                                             SizedBox(
                                               width: 30,
                                               height: 30,
-                                              child: Icon(
-                                                Icons.gps_fixed,
-                                                color: Color(0xFF000000),
-                                                size: 20,
+                                              child: Center(
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.crosshairs,
+                                                  color: Color(0xFF000000),
+                                                  size: 18,
+                                                ),
                                               ),
                                             ),
                                             MouseRegion(
@@ -163,10 +114,12 @@ class _ProyeccionState extends State<Proyeccion> {
                                                     ),
                                                     color: _hoveredG ? AppColors.backgroundComponentSelected : Colors.transparent,
                                                   ),
-                                                  child: Icon(
-                                                    Icons.navigate_next,
-                                                    color: _hoveredG ? Color(0xFF000000) : Color(0x80000000),
-                                                    size: 20,
+                                                  child: Center(
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons.angleRight,
+                                                      color: _hoveredG ? Color(0xFF000000) : Color(0x80000000),
+                                                      size: 20,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -208,10 +161,12 @@ class _ProyeccionState extends State<Proyeccion> {
                                             SizedBox(
                                               width: 30,
                                               height: 30,
-                                              child: Icon(
-                                                Icons.checklist_rtl,
-                                                color: Color(0xFF000000),
-                                                size: 20,
+                                              child: Center(
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.listCheck,
+                                                  color: Color(0xFF000000),
+                                                  size: 18,
+                                                ),
                                               ),
                                             ),
                                             MouseRegion(
@@ -228,10 +183,12 @@ class _ProyeccionState extends State<Proyeccion> {
                                                     ),
                                                     color: _hoveredT ? AppColors.backgroundComponentSelected : Colors.transparent,
                                                   ),
-                                                  child: Icon(
-                                                    Icons.navigate_next,
-                                                    color: _hoveredT ? Color(0xFF000000) : Color(0x80000000),
-                                                    size: 20,
+                                                  child: Center(
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons.angleRight,
+                                                      color: _hoveredT ? Color(0xFF000000) : Color(0x80000000),
+                                                      size: 20,
+                                                    ),
                                                   ),
                                                 ),
                                               ),

@@ -56,29 +56,28 @@ class _HomeScreenState extends State<HomeScreen> {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: [
-                                  for (int i = 0; i < 4; i++)
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 8,
-                                      ),
-                                      child: Container(
-                                        width: ResponsiveSize.getPiscinaWidth(
-                                          context,
-                                        ),
-                                        height: ResponsiveSize.getPiscinaHeight(
-                                          context,
-                                        ),
-                                        color: Colors.transparent,
-                                        child: Piscina(),
-                                      ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
                                     ),
+                                    child: Container(
+                                      width: ResponsiveSize.getPiscinaWidth(
+                                        context,
+                                      ),
+                                      height: ResponsiveSize.getPiscinaHeight(
+                                        context,
+                                      ),
+                                      color: Colors.transparent,
+                                      child: Piscina(home: true),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                             const SizedBox(height: 20),
                             Container(
                               width: double.infinity,
-                              height: 60,
+                              height: 70,
                               color: Colors.transparent,
                               child: Diversidad(),
                             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pezco_client/core/responsive.dart';
 import 'package:pezco_client/core/widgets/hover_region.dart';
 
@@ -29,12 +30,12 @@ class _SettingsState extends State<Settings> {
             borderRadius: BorderRadius.circular(40),
           ),
           child: Center(
-            child: Icon(
-              Icons.settings,
+            child: FaIcon(
+              FontAwesomeIcons.gear,
               color: _hovered
                           ? const Color(0x99000000)
                           : const Color(0x80000000),
-              size: isTablet || isCompact ? 28 : 31,
+              size: isTablet || isCompact ? 22 : 29,
             ),
           ),
         ),

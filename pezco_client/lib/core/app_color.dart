@@ -8,6 +8,7 @@ class AppColors {
 
   static const Color background = Color(0xFFF4F4F4);
   static const Color backgroundComponent = Color(0x08000000);
+  static const Color backgroundComponentNavigate = Color.fromARGB(61, 0, 0, 0);
   static const Color backgroundComponentSelected = Color(0x80ffffff);
   static const Color backgroundElement = Color(0x4Dffffff);
   static const Color backgroundElementP = Color(0xC8000000);

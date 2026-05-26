@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pezco_client/core/app_color.dart';
 import 'package:pezco_client/core/responsive.dart';
 import 'package:pezco_client/core/widgets/hover_region.dart';
@@ -14,6 +15,7 @@ class Header extends StatefulWidget {
 
 class _HeaderState extends State<Header> {
   bool _hovered = false;
+  bool _hoveredMore = false;
   @override
   Widget build(BuildContext context) {
     final isCompact = ResponsiveSize.isCompactDevice(context);
@@ -71,10 +73,10 @@ class _HeaderState extends State<Header> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Center(
-                        child: Icon(
-                          Icons.search_rounded,
+                        child: FaIcon(
+                          FontAwesomeIcons.magnifyingGlass,
                           color: Colors.black,
-                          size: 20,
+                          size: 18,
                         ),
                       ),
                     ),
@@ -86,10 +88,12 @@ class _HeaderState extends State<Header> {
                       const SizedBox(
                         width: 25,
                         height: 25,
-                        child: Icon(
-                          Icons.notifications,
-                          color: Colors.black,
-                          size: 25,
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.solidBell,
+                            color: Colors.black,
+                            size: 22,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -138,33 +142,38 @@ class _HeaderState extends State<Header> {
                     ),
                   ),
                   const SizedBox(width: 30),
-                  Container(
-                    width: 100,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: AppColors.elements,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          const Icon(
-                            Icons.search_rounded,
-                            color: Colors.black,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 10),
-                          const Text(
-                            "Buscar",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
+                  MouseRegion(
+                    cursor: SystemMouseCursors.text,
+                    child: Container(
+                      width: 100,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: AppColors.elements,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Center(
+                              child: const FaIcon(
+                                FontAwesomeIcons.magnifyingGlass,
+                                color: Colors.black,
+                                size: 20,
+                              ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 10),
+                            const Text(
+                              "Buscar",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -175,52 +184,31 @@ class _HeaderState extends State<Header> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: Icon(
-                            Icons.notifications,
-                            color: Colors.black,
-                            size: 20,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        SizedBox(
-                          width: 40,
-                          height: 40,
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
                           child: HoverRegion(
                             onEnter: () => setState(() => _hovered = true),
                             onExit: () => setState(() => _hovered = false),
-                            child: MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              child: Container(
-                                height: 70,
-                                width: 70,
-                                decoration: BoxDecoration(
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: Center(
+                                child: FaIcon(
+                                  FontAwesomeIcons.solidBell,
                                   color: _hovered
-                                      ? AppColors.backgroundComponentSelected
-                                      : AppColors.backgroundElement,
-                                  borderRadius: BorderRadius.circular(40),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(40),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: -5,
-                                        bottom: -10,
-                                        child: Icon(
-                                          Icons.person,
-                                          color: const Color(0x80000000),
-                                          size: 50,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                      ? Color(0x80000000)
+                                      : Colors.black,
+                                  size: 20,
                                 ),
                               ),
                             ),
                           ),
+                        ),
+                        const SizedBox(width: 10),
+                        const SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: PerfilAvatar(),
                         ),
                         const SizedBox(width: 10),
                         Expanded(
@@ -228,13 +216,26 @@ class _HeaderState extends State<Header> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text("Nombre"),
-                              SizedBox(
-                                width: 40,
-                                height: 40,
-                                child: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: Colors.black,
-                                  size: 20,
+                              MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: HoverRegion(
+                                  onEnter: () =>
+                                      setState(() => _hoveredMore = true),
+                                  onExit: () =>
+                                      setState(() => _hoveredMore = false),
+                                  child: SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                    child: Center(
+                                      child: FaIcon(
+                                        FontAwesomeIcons.caretDown,
+                                        color: _hoveredMore
+                                            ? Color(0x80000000)
+                                            : Colors.black,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -289,10 +290,12 @@ class _HeaderState extends State<Header> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const Icon(
-                            Icons.search_rounded,
-                            color: Colors.black,
-                            size: 25,
+                          Center(
+                            child: const FaIcon(
+                              FontAwesomeIcons.magnifyingGlass,
+                              color: Colors.black,
+                              size: 22,
+                            ),
                           ),
                           const SizedBox(width: 10),
                           const Text(
@@ -314,13 +317,24 @@ class _HeaderState extends State<Header> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Icon(
-                            Icons.notifications,
-                            color: Colors.black,
-                            size: 25,
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: HoverRegion(
+                            onEnter: () => setState(() => _hovered = true),
+                            onExit: () => setState(() => _hovered = false),
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: Center(
+                                child: FaIcon(
+                                  FontAwesomeIcons.solidBell,
+                                  color: _hovered
+                                      ? Color(0x80000000)
+                                      : Colors.black,
+                                  size: 22,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(width: 20),
@@ -331,13 +345,26 @@ class _HeaderState extends State<Header> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text("Nombre"),
-                              SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: Colors.black,
-                                  size: 25,
+                              MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: HoverRegion(
+                                  onEnter: () =>
+                                      setState(() => _hoveredMore = true),
+                                  onExit: () =>
+                                      setState(() => _hoveredMore = false),
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Center(
+                                      child: FaIcon(
+                                        FontAwesomeIcons.caretDown,
+                                        color: _hoveredMore
+                                            ? Color(0x80000000)
+                                            : Colors.black,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],

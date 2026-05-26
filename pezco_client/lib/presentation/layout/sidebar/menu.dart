@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MenuItem {
   final IconData icon;
@@ -8,8 +9,8 @@ class MenuItem {
 }
 
 const List<MenuItem> menuItems = [
-  MenuItem(icon: Icons.home, label: 'Inicio'),
-  MenuItem(icon: Icons.waves, label: 'Piscinas'),
-  MenuItem(icon: Icons.bar_chart, label: 'Finanzas'),
-  MenuItem(icon: Icons.analytics, label: 'Reportes')
+  MenuItem(icon: FontAwesomeIcons.solidHouse, label: 'Inicio'),
+  MenuItem(icon: FontAwesomeIcons.water, label: 'Piscinas'),
+  MenuItem(icon: FontAwesomeIcons.chartSimple, label: 'Finanzas'),
+  MenuItem(icon: FontAwesomeIcons.squarePollVertical, label: 'Reportes')
 ];

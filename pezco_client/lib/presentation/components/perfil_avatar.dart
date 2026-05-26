@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pezco_client/core/app_color.dart';
 import 'package:pezco_client/core/responsive.dart';
 import 'package:pezco_client/core/widgets/hover_region.dart';
@@ -41,39 +42,38 @@ class _PerfilAvatarState extends State<PerfilAvatar> {
                 color: Colors.transparent,
                 child: ClipRRect(
                 borderRadius: BorderRadius.circular(40),
-                child: Stack(
-                  children: [
-                    if (isTablet)
-                      Positioned(
-                        left: -5,
-                        bottom: -12,
-                        child:  Icon(
-                          Icons.person,
-                          color: const Color(0x80000000),
-                          size: 70,
-                        ),
-                      )
-                    else if (isCompact)
-                       Positioned(
-                        left: -5,
-                        bottom: -10,
-                        child:  Icon(
-                          Icons.person,
-                          color: const Color(0x80000000),
-                          size: 50,
-                        ),
-                      )
-                    else 
-                      Positioned(
-                        left: -5,
-                        bottom: -16,
-                        child:  Icon(
-                          Icons.person,
-                          color: const Color(0x80000000),
-                          size: maxheight + 10,
-                        ),
-                      )
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(top:10),
+                  child: Stack(
+                    children: [
+                      if (isTablet)
+                        Center(
+                          child:  FaIcon(
+                            FontAwesomeIcons.solidUser,
+                            color: const Color(0x80000000),
+                            size: maxheight,
+                          ),
+                        )
+                      else if (isCompact)
+                         Center(
+                          child:  FaIcon(
+                            FontAwesomeIcons.solidUser,
+                            color: const Color(0x80000000),
+                            size: maxheight - 5,
+                          ),
+                        )
+                      else 
+                        Center(
+                          child:  Positioned(
+                            child: FaIcon(
+                              FontAwesomeIcons.solidUser,
+                              color: const Color(0x80000000),
+                              size: maxheight,
+                            ),
+                          ),
+                        )
+                    ],
+                  ),
                 ),
               ),
             );},
