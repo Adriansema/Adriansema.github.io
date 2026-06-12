@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Camadas extends Model
+class Camada extends Model
 {
     use HasFactory;
 
@@ -26,10 +26,7 @@ class Camadas extends Model
         'precio_comercial'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'fecha_ingreso' => 'datetime',
         'biomasa_inicial' => 'decimal:2',
         'densidad_poblacional' => 'decimal:2',
@@ -38,21 +35,21 @@ class Camadas extends Model
     
     public function suministro(): HasMany
     {
-        return $this->hasMany(Suministros::class);
+        return $this->hasMany(Suministro::class);
     }
 
-    public function estanque(): HasOne
+    public function estanque(): BelongsTo
     {
-        return $this->hasOne(Estanques::class);
+        return $this->belongsTo(Estanque::class, 'estanque_id');
     }
 
-    public function parametros(): BelongsTo
+    public function parametros(): HasMany
     {
-        return $this->belongsTo(Parametros::class);
+        return $this->hasMany(Parametro::class, 'camada_id');
     }
 
-    public function finanza(): BelongsTo
+    public function finanzas(): HasMany
     {
-        return $this->belongsTo(Finanzas::class);
+        return $this->hasMany(Finanza::class, 'camada_id');
     }
 }

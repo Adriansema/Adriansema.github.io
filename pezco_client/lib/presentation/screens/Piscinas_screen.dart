@@ -37,8 +37,7 @@ class _PiscinasScreenState extends State<PiscinasScreen> {
                           const columns = 2;
                           const spacing = 10.0;
                           const targetHeight = 350.0;
-
-                          // ancho de cada item descontando los espacios entre columnas
+                          
                           final itemWidth =
                               (constraints.maxWidth - spacing * (columns - 1)) /
                               columns;
@@ -51,7 +50,7 @@ class _PiscinasScreenState extends State<PiscinasScreen> {
                                   crossAxisSpacing: spacing,
                                   mainAxisSpacing: 10,
                                   childAspectRatio:
-                                      ratio, // ← altura controlada aquí
+                                      ratio,
                                 ),
                             itemCount: 12,
                             itemBuilder: (context, index) => Piscina(),

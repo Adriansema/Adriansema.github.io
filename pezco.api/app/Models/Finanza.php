@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Finanzas extends Model
+class Finanza extends Model
 {
     use HasFactory;
 
@@ -16,17 +16,14 @@ class Finanzas extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'usuaro_id',
+        'usuario_id',
         'camada_id',
         'fecha_emision',
         'precio_esperado',
         'precio_final'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'usuario_id' => 'integer',
         'camada_id' => 'integer',
         'fecha_emision' => 'datetime',
@@ -36,11 +33,11 @@ class Finanzas extends Model
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo(Usuarios::class);
+        return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
     }
 
-    public function camada(): HasMany
+    public function camada(): BelongsTo
     {
-        return $this->hasMany(Camadas::class);
+        return $this->belongsTo(Camada::class, 'camada_id');
     }
 }

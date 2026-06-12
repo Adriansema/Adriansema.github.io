@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Usuarios extends Model
+class UsuarioInfo extends Model
 {
     use HasFactory;
 
@@ -33,8 +33,6 @@ class Usuarios extends Model
         'estado'
     ];
 
-    protected $guarded = ['id'];
-
     protected $hidden = [
         'dni',
         'tipo_dni',
@@ -45,7 +43,6 @@ class Usuarios extends Model
     ];
 
     protected $casts = [
-        'id' => 'integer',
         'dni' => 'integer',
         'fecha_registro' => 'datetime',
         'fecha_actualizacion' => 'datetime',
@@ -53,31 +50,31 @@ class Usuarios extends Model
 
     public function finanzas(): HasMany
     {
-        return $this->hasMany(Finanzas::class);
+        return $this->hasMany(Finanza::class);
     }
 
     public function estanques(): HasMany
     {
-        return $this->hasMany(Estanques::class);
+        return $this->hasMany(Estanque::class);
     }
 
     public function insumos(): HasMany
     {
-        return $this->hasMany(Insumos::class);
+        return $this->hasMany(Insumo::class);
     }
 
     public function pagos(): HasMany
     {
-        return $this->hasMany(Pagos::class);
+        return $this->hasMany(Pago::class);
     }
 
     public function licencia(): HasMany
     {
-        return $this->hasMany(Usuario_licencia::class);
+        return $this->hasMany(UsuarioLicencia::class);
     }
 
     public function ingreso(): HasOne
     {
-        return $this->hasOne(Datos_de_ingreso_usuario::class);
+        return $this->hasOne(Usuario::class, 'usuario_id');
     }
 }

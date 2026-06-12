@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Estanques extends Model
+class Estanque extends Model
 {
     use HasFactory;
 
@@ -27,10 +28,7 @@ class Estanques extends Model
         'tipo_estanque'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'usuario_id' => 'integer',
         'm_frente' => 'decimal:2',
         'm_fondo' => 'decimal:2',
@@ -42,11 +40,16 @@ class Estanques extends Model
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo(Usuarios::class);
+        return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
     }
 
-    public function camadas(): BelongsTo
+    public function camadas(): HasMany
     {
-        return $this->belongsTo(Camadas::class);
+        return $this->hasMany(Camada::class);
+    }
+
+    public function camadaActiva()
+    {
+        return $this->hasOne(Camada::class)->where('estado', 'activa')->latest();
     }
 }

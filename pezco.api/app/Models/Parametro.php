@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Parametros extends Model
+class Parametro extends Model
 {
     use HasFactory;
 
@@ -29,10 +29,7 @@ class Parametros extends Model
         'fecha_medicion'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'camada_id' => 'integer',
         'n_medicion' => 'integer',
         'muertes' => 'integer',
@@ -50,6 +47,6 @@ class Parametros extends Model
 
     public function camada()
     {
-        return $this->belongsTo(Camadas::class);
+        return $this->belongsTo(Camada::class, 'camada_id');
     }
 }

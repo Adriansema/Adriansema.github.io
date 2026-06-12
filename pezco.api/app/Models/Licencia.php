@@ -11,7 +11,7 @@ class Licencia extends Model
 {
     use HasFactory;
 
-    protected $table = 'licencia';
+    protected $table = 'licencias';
 
     protected $primaryKey = 'id';
 
@@ -27,10 +27,7 @@ class Licencia extends Model
         'tipo_cambio'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'estanques' => 'integer',
         'duracion_mes' => 'integer',
         'precio_mes' => 'decimal:2',
@@ -39,6 +36,6 @@ class Licencia extends Model
 
     public function usuario_licencia(): HasMany
     {
-        return $this->hasMany(Usuario_licencia::class);
+        return $this->hasMany(UsuarioLicencia::class);
     }
 }

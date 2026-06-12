@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Suministros extends Model
+class Suministro extends Model
 {
     use HasFactory;
 
@@ -22,21 +22,18 @@ class Suministros extends Model
         'unidad_metrica'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'fecha' => 'datetime',
         'cantidad' => 'decimal:2'
     ];
 
     public function insumo(): BelongsTo
     {
-        return $this->belongsTo(Insumos::class);
+        return $this->belongsTo(Insumo::class, 'insumo_id');
     }
 
     public function camada(): BelongsTo
     {
-        return $this->belongsTo(Camadas::class);
+        return $this->belongsTo(Camada::class, 'camada_id');
     }
 }

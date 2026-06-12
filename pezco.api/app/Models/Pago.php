@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Pagos extends Model
+class Pago extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,6 @@ class Pagos extends Model
 
     protected $fillable = [
         'usuario_id',
-        'licencia_id',
         'usuario_licencia_id',
         'metodo_pago',
         'monto',
@@ -25,12 +24,8 @@ class Pagos extends Model
         'fecha_pago'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'usuario_id' => 'integer',
-        'licencia_id' => 'integer',
         'usuario_licencia_id' => 'integer',
         'monto' => 'decimal:2',
         'fecha_pago' => 'datetime',
@@ -38,11 +33,11 @@ class Pagos extends Model
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo(Usuarios::class);
+        return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
     }
 
     public function usuario_licencia(): BelongsTo
     {
-        return $this->belongsTo(Usuario_licencia::class);
+        return $this->belongsTo(UsuarioLicencia::class, 'usuario_licencia_id');
     }
 }

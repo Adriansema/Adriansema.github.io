@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Usuario_licencia extends Model
+class UsuarioLicencia extends Model
 {
     use HasFactory;
 
@@ -23,10 +23,7 @@ class Usuario_licencia extends Model
         'estado'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'usuario_id' => 'integer',
         'licencia_id' => 'integer',
         'fecha_emision' => 'datetime',
@@ -35,16 +32,16 @@ class Usuario_licencia extends Model
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo(Usuarios::class);
+        return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
     }
 
     public function licencia(): BelongsTo
     {
-        return $this->belongsTo(Licencia::class);
+        return $this->belongsTo(Licencia::class, 'licencia_id');
     }
 
     public function pagos(): HasMany
     {
-        return $this->hasMany(Pagos::class);
+        return $this->hasMany(Pago::class);
     }
 }

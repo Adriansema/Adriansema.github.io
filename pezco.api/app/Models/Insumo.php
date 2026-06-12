@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Insumos extends Model
+class Insumo extends Model
 {
     use HasFactory;
 
@@ -24,10 +24,7 @@ class Insumos extends Model
         'costo'
     ];
 
-    protected $guarded = ['id'];
-
     protected $casts = [
-        'id' => 'integer',
         'cantidad' => 'decimal:2',
         'fecha' => 'datetime',
         'costo' => 'decimal:2'
@@ -35,11 +32,11 @@ class Insumos extends Model
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo(Usuarios::class);
+        return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
     }
 
     public function suministro(): HasMany
     {
-        return $this->hasMany(Suministros::class);
+        return $this->hasMany(Suministro::class);
     }
 }
