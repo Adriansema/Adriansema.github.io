@@ -9,39 +9,39 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class UsuarioLicencia extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'usuario_licencia';
+  protected $table = 'usuario_licencia';
 
-    protected $primaryKey = 'id';
+  protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'usuario_id',
-        'licencia_id',
-        'fecha_emision',
-        'fecha_expiracion',
-        'estado'
-    ];
+  protected $fillable = [
+    'usuario_id',
+    'licencia_id',
+    'fecha_emision',
+    'fecha_expiracion',
+    'estado'
+  ];
 
-    protected $casts = [
-        'usuario_id' => 'integer',
-        'licencia_id' => 'integer',
-        'fecha_emision' => 'datetime',
-        'fecha_expiracion' => 'datetime',
-    ];
+  protected $casts = [
+    'usuario_id' => 'integer',
+    'licencia_id' => 'integer',
+    'fecha_emision' => 'datetime',
+    'fecha_expiracion' => 'datetime',
+  ];
 
-    public function usuario(): BelongsTo
-    {
-        return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
-    }
+  public function usuario(): BelongsTo
+  {
+    return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
+  }
 
-    public function licencia(): BelongsTo
-    {
-        return $this->belongsTo(Licencia::class, 'licencia_id');
-    }
+  public function licencia(): BelongsTo
+  {
+    return $this->belongsTo(Licencia::class, 'licencia_id');
+  }
 
-    public function pagos(): HasMany
-    {
-        return $this->hasMany(Pago::class);
-    }
+  public function pagos(): HasMany
+  {
+    return $this->hasMany(Pago::class);
+  }
 }

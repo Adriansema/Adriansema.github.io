@@ -8,20 +8,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VerificarRol
 {
-    public function handle(Request $request, Closure $next, string ...$roles): Response
-    {
-        if (!$request->user()) {
-            return response()->json([
-                'mensaje' => 'No autenticado'
-            ], 401);
-        }
-
-        if (!in_array($request->user()->rol, $roles)) {
-            return response()->json([
-                'mensaje' => 'No tienes permisos para realizar esta acción'
-            ], 403);
-        }
-
-        return $next($request);
+  public function handle(Request $request, Closure $next, string ...$roles): Response
+  {
+    if (!$request->user()) {
+      return response()->json([
+        'mensaje' => 'No autenticado'
+      ], 401);
     }
+
+    if (!in_array($request->user()->rol, $roles)) {
+      return response()->json([
+        'mensaje' => 'No tienes permisos para realizar esta acción'
+      ], 403);
+    }
+
+    return $next($request);
+  }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained('usuarios')
                 ->onDelete('cascade');
             $table->foreignId('licencia_id')
-                ->constrained('licencia')
+                ->constrained('licencias')
                 ->onDelete('cascade');
             $table->timestamp('fecha_emision');
             $table->timestamp('fecha_expiracion');

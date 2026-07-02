@@ -19,9 +19,19 @@ return new class extends Migration
             $table->foreignId('camada_id')
                 ->constrained('camadas')
                 ->onDelete('cascade');
+            $table->foreignId('estanque_id')
+                ->constrained('estanques')
+                ->onDelete('cascade');
             $table->timestamp('fecha_emision');
-            $table->decimal('precio_esperado', 10, 2)->nullable();
-            $table->decimal('precio_final', 10, 2)->nullable();
+            $table->decimal('ingresos_brutos', 12, 2)->default(0);
+            $table->decimal('costo_insumos', 12, 2)->default(0);
+            $table->decimal('perdidas', 12, 2)->default(0);
+            $table->decimal('rentabilidad_neta', 12, 2)->default(0);
+            $table->decimal('precio_comercial', 12, 2)->default(0);
+            $table->integer('cantidad_vendida')->default(0);
+            $table->integer('cantidad_muertes')->default(0);
+            $table->integer('cantidad_no_vendida')->default(0);
+            $table->string('tipo_informe')->default('general');
             $table->timestamps();
         });
     }

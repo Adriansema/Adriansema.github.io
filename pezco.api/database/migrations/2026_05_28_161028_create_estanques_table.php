@@ -21,10 +21,15 @@ return new class extends Migration
             $table->decimal('m_fondo', 8, 2);
             $table->decimal('m_profundo', 8, 2);
             $table->decimal('m_cubicos', 10, 2);
-            $table->integer('capacidad_ejemplares');
+            $table->integer('capacidad_alevin')->nullable();
+            $table->integer('capacidad_juvenil')->nullable();
+            $table->integer('capacidad_adulto')->nullable();
+            $table->integer('capacidad_reproductor')->nullable();
+            $table->string('tipo_estanque');
+            $table->date('fecha_mantenimiento')->nullable();
+            $table->date('fecha_vida_util')->nullable();
             $table->timestamp('fecha');
             $table->string('estado')->default('activo');
-            $table->string('tipo_estanque')->nullable();
             $table->timestamps();
         });
     }

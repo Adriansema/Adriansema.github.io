@@ -9,33 +9,33 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Licencia extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'licencias';
+  protected $table = 'licencias';
 
-    protected $primaryKey = 'id';
+  protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'nombre',
-        'tipo',
-        'descripcion',
-        'estanques',
-        'soporte',
-        'duracion_mes',
-        'precio_mes',
-        'precio_anual',
-        'tipo_cambio'
-    ];
+  protected $fillable = [
+    'nombre',
+    'tipo',
+    'descripcion',
+    'estanques',
+    'soporte',
+    'duracion_mes',
+    'precio_mes',
+    'precio_anual',
+    'tipo_cambio'
+  ];
 
-    protected $casts = [
-        'estanques' => 'integer',
-        'duracion_mes' => 'integer',
-        'precio_mes' => 'decimal:2',
-        'precio_anual' => 'decimal:2'
-    ];
+  protected $casts = [
+    'estanques' => 'integer',
+    'duracion_mes' => 'integer',
+    'precio_mes' => 'decimal:2',
+    'precio_anual' => 'decimal:2'
+  ];
 
-    public function usuario_licencia(): HasMany
-    {
-        return $this->hasMany(UsuarioLicencia::class);
-    }
+  public function usuario_licencia(): HasMany
+  {
+    return $this->hasMany(UsuarioLicencia::class);
+  }
 }

@@ -9,34 +9,34 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Insumo extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'insumos';
+  protected $table = 'insumos';
 
-    protected $primaryKey = 'id';
+  protected $primaryKey = 'id';
 
-    protected $fillable = [
-        'insumo',
-        'cantidad',
-        'unidad_metrica',
-        'usuario_id',
-        'fecha',
-        'costo'
-    ];
+  protected $fillable = [
+    'insumo',
+    'cantidad',
+    'unidad_metrica',
+    'usuario_id',
+    'fecha',
+    'costo'
+  ];
 
-    protected $casts = [
-        'cantidad' => 'decimal:2',
-        'fecha' => 'datetime',
-        'costo' => 'decimal:2'
-    ];
+  protected $casts = [
+    'cantidad' => 'decimal:2',
+    'fecha' => 'datetime',
+    'costo' => 'decimal:2'
+  ];
 
-    public function usuario(): BelongsTo
-    {
-        return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
-    }
+  public function usuario(): BelongsTo
+  {
+    return $this->belongsTo(UsuarioInfo::class, 'usuario_id');
+  }
 
-    public function suministro(): HasMany
-    {
-        return $this->hasMany(Suministro::class);
-    }
+  public function suministro(): HasMany
+  {
+    return $this->hasMany(Suministro::class);
+  }
 }
