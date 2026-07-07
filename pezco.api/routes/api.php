@@ -14,14 +14,17 @@ use App\Http\Controllers\InsumosController;
 use App\Http\Controllers\SuministrosController;
 use App\Http\Controllers\FinanzasController;
 use App\Http\Controllers\EspeciesController;
-
+use App\Http\Controllers\ProyeccionController;
+//apiResource
 Route::prefix('auth')->group(function () {
   Route::post('/registro', [AuthController::class, 'registro']);
   Route::post('/login',    [AuthController::class, 'login']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-  
+  Route::get('proyecciones/resumen-home', [ProyeccionController::class, 'resumenHome']);
+  Route::apiResource('proyecciones', ProyeccionController::class);
+
   Route::get('/especies',      [EspeciesController::class, 'index']);
   Route::get('/especies/{id}', [EspeciesController::class, 'show']);
 

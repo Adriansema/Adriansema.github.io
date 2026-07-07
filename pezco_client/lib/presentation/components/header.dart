@@ -97,7 +97,7 @@ class _HeaderState extends State<Header> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      const SizedBox(width: 25, height: 25, child: Settings()),
+                      const SizedBox(width: 25),
                       const SizedBox(width: 10),
                       const SizedBox(
                         width: 40,
