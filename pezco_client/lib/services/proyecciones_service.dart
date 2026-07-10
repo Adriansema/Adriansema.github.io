@@ -1,4 +1,3 @@
-// lib/services/proyecciones_service.dart
 import '../models/proyeccion_models.dart';
 import 'api_service.dart';
 

@@ -1,8 +1,7 @@
-// lib/services/api_service.dart
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-/// Excepción base para errores de la API
+// Excepción base para errores de la API
 class ApiException implements Exception {
   final String message;
   final int? statusCode;
@@ -13,24 +12,24 @@ class ApiException implements Exception {
   String toString() => message;
 }
 
-/// Credenciales incorrectas o token inválido/expirado (401)
+// Credenciales incorrectas o token inválido/expirado (401)
 class UnauthorizedException extends ApiException {
   UnauthorizedException(super.message) : super(statusCode: 401);
 }
 
-/// Errores de validación del backend (422)
+// Errores de validación del backend (422)
 class ValidationException extends ApiException {
   final Map<String, dynamic> errors;
   ValidationException(super.message, this.errors) : super(statusCode: 422);
 }
 
-/// Sin conexión a internet o servidor no responde
+// Sin conexión a internet o servidor no responde
 class NetworkException extends ApiException {
   NetworkException(super.message);
 }
 
 class ApiService {
-  // Ajusta esto según dónde corra tu servidor Laravel
+  // Puerto donde corre el backend
   static const String baseUrl = 'http://127.0.0.1:8000/api';
 
   String? _token;
@@ -38,13 +37,14 @@ class ApiService {
   void setToken(String? token) {
     _token = token;
   }
+
   void Function()? onUnauthorized;
 
   Map<String, String> get _headers => {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        if (_token != null) 'Authorization': 'Bearer $_token',
-      };
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    if (_token != null) 'Authorization': 'Bearer $_token',
+  };
 
   Future<dynamic> get(String endpoint) => _request('GET', endpoint);
 
@@ -68,7 +68,8 @@ class ApiService {
 
       switch (method) {
         case 'GET':
-          response = await http.get(uri, headers: _headers)
+          response = await http
+              .get(uri, headers: _headers)
               .timeout(const Duration(seconds: 10));
           break;
         case 'POST':
@@ -82,7 +83,8 @@ class ApiService {
               .timeout(const Duration(seconds: 10));
           break;
         case 'DELETE':
-          response = await http.delete(uri, headers: _headers)
+          response = await http
+              .delete(uri, headers: _headers)
               .timeout(const Duration(seconds: 10));
           break;
         default:
@@ -92,7 +94,8 @@ class ApiService {
       return _handleResponse(response);
     } on http.ClientException {
       throw NetworkException(
-          'No se pudo conectar con el servidor. Verifica tu conexión.');
+        'No se pudo conectar con el servidor. Verifica tu conexión.',
+      );
     } catch (e) {
       if (e is ApiException) rethrow;
       throw NetworkException('Ocurrió un error inesperado: $e');
@@ -123,10 +126,7 @@ class ApiService {
         onUnauthorized?.call();
         throw UnauthorizedException(mensaje);
       case 422:
-        throw ValidationException(
-          mensaje,
-          decoded['errors'] ?? {},
-        );
+        throw ValidationException(mensaje, decoded['errors'] ?? {});
       default:
         throw ApiException(mensaje, statusCode: statusCode);
     }

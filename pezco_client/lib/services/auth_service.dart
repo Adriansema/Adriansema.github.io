@@ -1,4 +1,3 @@
-// lib/services/auth_service.dart
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'api_service.dart';
 
@@ -18,12 +17,12 @@ class Usuario {
   });
 
   factory Usuario.fromJson(Map<String, dynamic> json) => Usuario(
-        id: json['id'],
-        nombre: json['nombre'],
-        apellidos: json['apellidos'],
-        campoAplicacion: json['campo_aplicacion'],
-        estado: json['estado'],
-      );
+    id: json['id'],
+    nombre: json['nombre'],
+    apellidos: json['apellidos'],
+    campoAplicacion: json['campo_aplicacion'],
+    estado: json['estado'],
+  );
 }
 
 class AuthService {
@@ -35,10 +34,10 @@ class AuthService {
   AuthService(this._apiService);
 
   Future<Usuario> login(String correo, String contrasena) async {
-    final response = await _apiService.post('auth/login', body: {
-      'correo': correo,
-      'contrasena': contrasena,
-    });
+    final response = await _apiService.post(
+      'auth/login',
+      body: {'correo': correo, 'contrasena': contrasena},
+    );
 
     final token = response['token'] as String;
     final usuario = Usuario.fromJson(response['usuario']);
@@ -60,7 +59,7 @@ class AuthService {
     }
   }
 
-  /// Intenta restaurar el token guardado al abrir la app
+  // Intenta restaurar el token guardado al abrir la app
   Future<String?> getStoredToken() async {
     final token = await _storage.read(key: _tokenKey);
     if (token != null) {

@@ -1,5 +1,3 @@
-// lib/models/proyeccion_models.dart
-
 class ResumenProyeccion {
   final int metaTotal;
   final int ingresadoTotal;
@@ -22,6 +20,5 @@ class ResumenProyeccion {
     );
   }
 
-  /// Sin proyecciones vigentes = no hay nada que mostrar
   bool get sinDatos => proyeccionesActivas == 0;
 }

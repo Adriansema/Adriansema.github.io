@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// Decide qué pantalla mostrar según el estado de autenticación
+// Decide qué pantalla mostrar según el estado de autenticación
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({super.key});
 

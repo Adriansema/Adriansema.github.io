@@ -1,4 +1,3 @@
-// lib/presentation/screens/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
@@ -86,25 +85,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Icon(
-                    Icons.water,
-                    size: 64,
-                    color: colorScheme.primary,
-                  ),
+                  Icon(Icons.water, size: 64, color: colorScheme.primary),
                   const SizedBox(height: 16),
                   Text(
                     'Pezco',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     'Sistema de gestión piscícola',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   const SizedBox(height: 32),
 
@@ -139,7 +134,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               : Icons.visibility_off_outlined,
                         ),
                         onPressed: () {
-                          setState(() => _ocultarContrasena = !_ocultarContrasena);
+                          setState(
+                            () => _ocultarContrasena = !_ocultarContrasena,
+                          );
                         },
                       ),
                     ),

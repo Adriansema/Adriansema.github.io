@@ -1,4 +1,3 @@
-// lib/providers/auth_provider.dart
 import 'package:flutter/foundation.dart';
 import '../services/api_service.dart';
 import '../services/auth_service.dart';
@@ -21,10 +20,9 @@ class AuthProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get isAuthenticated => _status == AuthStatus.autenticado;
 
-  /// Se llama una vez al arrancar la app, para ver si hay un token guardado.
-  /// Como no hay endpoint de validación, solo confiamos en que exista el token.
-  /// Si en algún momento el token es inválido, la primera petición a la API
-  /// devolverá 401 y desde ahí forzamos logout.
+  // Se llama una vez al arrancar la app, para ver si hay un token guardado.
+  // Si en algún momento el token es inválido, la primera petición a la API
+  // devolverá 401 y desde ahí forzamos logout.
   Future<void> intentarRestaurarSesion() async {
     final token = await _authService.getStoredToken();
     _status = token != null ? AuthStatus.autenticado : AuthStatus.noAutenticado;
